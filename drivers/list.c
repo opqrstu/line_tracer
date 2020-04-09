@@ -7,9 +7,9 @@ struct driver_list_node_t
     struct driver_list_node_t *next;
 };
 
-struct driver_list_node_t *driver_list_head;
+struct driver_list_node_t *driver_list_head = 0;
 
-int init_driver_list(struct driver_list_node_t** head)
+int init_driver_head(struct driver_list_node_t** head)
 {
     *head = 0;
     *head = malloc(sizeof(struct driver_list_node_t));
@@ -56,14 +56,16 @@ int print_driver_list(struct driver_list_node_t *head)
 {
     struct driver_list_node_t* tmp_node = 0;
 
-    for(tmp_node = head; tmp_node; tmp_node = tmp_node->next)
+    for(tmp_node = head->next; tmp_node; tmp_node = tmp_node->next)
         printf("%d\n",tmp_node->driver.b);
 
     return 0;
 }
+
 struct device_driver_t* get_device_driver(char* index, struct driver_list_node_t* head)
 {
     struct driver_list_node_t* tmp_node = 0;
+    
     for(tmp_node = head; tmp_node;tmp_node = tmp_node->next)
     {
         if(strcmp(tmp_node->driver.name, index) == 0)
@@ -72,3 +74,13 @@ struct device_driver_t* get_device_driver(char* index, struct driver_list_node_t
     return 0;
 }
 
+int init_drivers(struct driver_list_node_t *head)
+{
+    struct driver_list_node_t* tmp_node = 0;
+
+    for(tmp_node = head->next; tmp_node;tmp_node = tmp_node->next)
+    {
+        if(tmp_node->driver.init)
+            tmp_node->driver.init();
+    }
+}
