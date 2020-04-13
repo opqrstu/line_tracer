@@ -5,6 +5,7 @@
 int init_led(void)
 {
     LED_DDR = 0xff;
+
 	return 0;
 }
 

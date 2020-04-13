@@ -33,7 +33,7 @@ int init_timer(void)
 	TIMSK |= 0x1;
 	TCCR0 |= 0x7; // 주파수를 낮춤 1024 나눔
 	TCNT0 = 0;
-	
+	timer_datas.sec = 0;
 	return 0;
 }
 

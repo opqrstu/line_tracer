@@ -75,12 +75,15 @@ struct device_driver_t* get_device_driver(char* index, struct driver_list_node_t
     return -1;
 }
 
+unsigned char ledtest = 0xff;
 int init_drivers(struct driver_list_node_t *head)
 {
     struct driver_list_node_t* tmp_node = 0;
 
+PORTC = ledtest--;
     for(tmp_node = head->next; tmp_node;tmp_node = tmp_node->next)
     {
+PORTC = ledtest--;
         if(tmp_node->driver.init)
             tmp_node->driver.init();
     }
