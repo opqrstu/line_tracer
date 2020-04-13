@@ -21,7 +21,6 @@ int main(void)
 		if(current_time != past_time)
 		{
 			count_led();
-			speed_test_motor();
 		}
 	}
 #ifndef OS_ATMEGA

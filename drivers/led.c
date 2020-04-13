@@ -8,7 +8,14 @@ int init_led(void)
 
 	return 0;
 }
+int write_led(char pin, char op)
+{
+    op ? (LED_PORT |= pin) : (LED_PORT &= ~pin);
 
+	return 0;
+}
+
+#if 0
 int write_led(char pin, char op)
 {
     switch(pin)
@@ -40,7 +47,7 @@ int write_led(char pin, char op)
     }
 	return 0;
 }
-
+#endif
 struct device_driver_t led_driver =
 {
     .name = "led_driver",
