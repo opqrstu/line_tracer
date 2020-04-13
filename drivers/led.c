@@ -1,14 +1,14 @@
-#include "../include/common.h"
-#include "../include/line_tracer.h"
-#include "list.h"
+#include <line_tracer.h>
+#include <common.h>
 
 #ifdef LED_DRIVER
 int init_led(void)
 {
     LED_DDR = 0xff;
+	return 0;
 }
 
-int led_ctrl(char op, char pin)
+int write_led(char pin, char op)
 {
     switch(pin)
     {
@@ -37,13 +37,14 @@ int led_ctrl(char op, char pin)
             op ? (LED_PORT |= 0x80) : (LED_PORT &= ~0x80);
             break;
     }
+	return 0;
 }
 
 struct device_driver_t led_driver =
 {
     .name = "led_driver",
     .init = init_led,
-    .b = 11
+	.write = write_led
 };
 
 MODULE_INIT(led_driver)

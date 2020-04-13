@@ -1,5 +1,4 @@
-#include "../include/common.h"
-#include "list.h"
+#include <common.h>
 
 struct driver_list_node_t
 {
@@ -52,6 +51,7 @@ int add_driver_list(struct device_driver_t driver, struct driver_list_node_t* he
     return 0;
 }
 
+#ifndef OS_ATMEGA
 int print_driver_list(struct driver_list_node_t *head)
 {
     struct driver_list_node_t* tmp_node = 0;
@@ -61,6 +61,7 @@ int print_driver_list(struct driver_list_node_t *head)
 
     return 0;
 }
+#endif
 
 struct device_driver_t* get_device_driver(char* index, struct driver_list_node_t* head)
 {
@@ -71,7 +72,7 @@ struct device_driver_t* get_device_driver(char* index, struct driver_list_node_t
         if(strcmp(tmp_node->driver.name, index) == 0)
             return &tmp_node->driver;
     }
-    return 0;
+    return -1;
 }
 
 int init_drivers(struct driver_list_node_t *head)
