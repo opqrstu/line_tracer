@@ -13,7 +13,6 @@ enum LED_CTRL
 #endif
 };
 
-#error
 static unsigned char led_count = 0;
 int count_led()
 {
@@ -27,7 +26,8 @@ int count_led()
 	if(led_count > 0x0f)
 		led_count = 0;
 
-	LED_PORT = ~(led_count & 0x0f);
-	
+    led->write(0xff, LED_OFF);
+    led->write(led_count, LED_ON);
+
 	return 0;
 }
