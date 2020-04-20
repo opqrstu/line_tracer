@@ -15,9 +15,9 @@
 #define MOTOR_L1_OUT_PIN 5
 #define MOTOR_L2_OUT_PIN 6
 
-#define MOTOR_R_EN_PIN 4
-#define MOTOR_R1_OUT_PIN 5
-#define MOTOR_R2_OUT_PIN 6
+#define MOTOR_R_EN_PIN 2
+#define MOTOR_R1_OUT_PIN 3
+#define MOTOR_R2_OUT_PIN 4
 
 #define MOTOR_L_PORT PORTB
 #define MOTOR_R_PORT PORTE
