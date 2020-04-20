@@ -1,6 +1,7 @@
 #include <line_tracer.h>
 #include <common.h>
 #include "apps/led_ctrl.h"
+#include "apps/motor_ctrl.h"
 
 int main(void)
 {

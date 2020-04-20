@@ -37,10 +37,10 @@ int init_motor(void)
 	ICR3H = 8192 >> 8;
 	ICR3L = 8192 & 0xff;
 
-	OCR3AH = (ICR3*0.1) >> 8;
-	OCR3AL = (ICR3*0.1) & 0xff;
-	OCR3BH = (ICR3*0.1) >> 8;
-	OCR3BL = (ICR3*0.1) & 0xff;
+	OCR3AH = (ICR3H*0.1);
+	OCR3AL = (ICR3L*0.1);
+	OCR3BH = (ICR3H*0.1);
+	OCR3BL = (ICR3L*0.1);
 
 	TCNT1H = 0;
 	TCNT1L = 0;
@@ -63,13 +63,13 @@ int write_motor(unsigned char motor_sel, unsigned char speed)
 	}
 	else if(motor_sel == MOTOR_R1)
 	{
-    	OCR3AH = (ICR3*speed*0.1) >> 8;
-	    OCR3AL = (ICR3*speed*0.1) & 0xff;
+    	OCR3AH = (ICR3H*speed*0.1);
+	    OCR3AL = (ICR3L*speed*0.1);
 	}
 	else if(motor_sel == MOTOR_R2)
 	{
-    	OCR3BH = (ICR3*speed*0.1) >> 8;
-	    OCR3BL = (ICR3*speed*0.1) & 0xff;
+    	OCR3BH = (ICR3*speed*0.1);
+	    OCR3BL = (ICR3*speed*0.1);
 	}
     else
         return -1;

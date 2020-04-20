@@ -19,7 +19,7 @@ main.d main.o: .././main.c ../include/line_tracer.h ../include/common.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
  ../drivers/include/timer.h ../drivers/include/motor.h \
- ../drivers/include/list.h .././apps/led_ctrl.h
+ ../drivers/include/list.h .././apps/led_ctrl.h .././apps/motor_ctrl.h
 
 ../include/line_tracer.h:
 
@@ -70,3 +70,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../drivers/include/list.h:
 
 .././apps/led_ctrl.h:
+
+.././apps/motor_ctrl.h:
