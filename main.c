@@ -11,7 +11,9 @@ int main(void)
     init_drivers(driver_list_head);
 
     struct device_driver_t* timer = -1;
+    struct device_driver_t* uart = -1;
     timer = get_device_driver("timer_driver", driver_list_head);
+    uart = get_device_driver("uart_driver", driver_list_head);
     if(timer == -1)
         return 0;
 
@@ -22,6 +24,7 @@ int main(void)
 
         if(current_time != past_time)
         {
+            uart->write('a' + motor_test_flag);
             count_led();
             if(motor_test_flag == 0)
                 motor_forward(MOTOR_SPEED50);

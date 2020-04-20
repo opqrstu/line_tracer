@@ -1,6 +1,7 @@
 #define LED_DRIVER
 #define TIMER_DRIVER
 #define MOTOR_DRIVER
+#define UART_DRIVER
 
 #ifdef LED_DRIVER
 #define LED_PORT PORTC
