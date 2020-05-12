@@ -66,7 +66,7 @@ int write_motor(unsigned char motor_sel, unsigned char speed)
 	}
 	else if(motor_sel == MOTOR_R1)
     {
-        unsigned int tmp_ICR3 = (ICR3H << 8) | (ICR3L & 0xff);
+        unsigned int tmp_ICR3 = 8192;//(ICR3H << 8) | (ICR3L & 0xff);
         tmp_ICR3 *= 0.1*speed;
 
         OCR3AH = (tmp_ICR3 >> 8);
@@ -74,7 +74,7 @@ int write_motor(unsigned char motor_sel, unsigned char speed)
     }
 	else if(motor_sel == MOTOR_R2)
 	{
-        unsigned int tmp_ICR3 = (ICR3H << 8) | (ICR3L & 0xff);
+        unsigned int tmp_ICR3 = 8192;//(ICR3H << 8) | (ICR3L & 0xff);
         tmp_ICR3 *= 0.1*speed;
 
         OCR3BH = (tmp_ICR3 >> 8);

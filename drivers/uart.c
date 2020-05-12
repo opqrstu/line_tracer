@@ -1,53 +1,48 @@
 #include <line_tracer.h>
 #include <common.h>
-
+#include <uart.h>
 #ifdef UART_DRIVER
 
-#define UART_REG 0xC0 
 
-struct uart 
-{ 
-    uint8_t ucsr_a; 
-    uint8_t ucsr_b; 
-    uint8_t ucsr_c; 
-    uint8_t reserved; 
-    uint8_t ubrr_l; 
-    uint8_t ubrr_h; 
-    uint8_t udr; 
-}; 
-
-volatile struct uart *const uart = (void*)UART_REG;
 
 int init_uart(void)
 {
-
-    uint16_t baudrate = F_CPU/UART_BAUDRATE/16 - 1;
-
-    uart->ucsr_b = 0x00;
-    uart->ucsr_a = 0x00;
-    uart->ucsr_c = DATA_8BIT << CHAR_SZ_SHIFT; // 8,N,1
-    uart->ubrr_h = (baudrate >> 8) & 0xFF;
-    uart->ubrr_l = baudrate & 0xFF;
-    uart->ucsr_b = (RXEN | TXEN);
-
-	return 0;
+	UCSR1A = 0x00;
+	UCSR1B = 0x88; //rx enable 0x98
+	UCSR1C = 0x06;
+	UBRR1H = 0x00;
+	UBRR1L = 51;                // 9600 BR
 }
-int write_uart(uint8_t data)
+
+static char rx_char(void) 
 {
-    if (data == '\n')
-        uart_tx('\r');
- 
-    while (!(uart->ucsr_a & UDRE));
-    uart->udr = data;
-
-	return 0;
+	while((UCSR1A&0x80) == 0);
+	return UDR1; 
 }
+
+static void tx_char(char tx_data)
+{
+	while((UCSR1A&0x20) == 0);
+	UDR1 = tx_data; 
+}
+
+static void tx_str(char* str)
+{
+	while(*str!='\0')
+	{
+		if(*str=='\n')
+		tx_char('\r');
+		tx_char(*str);
+		str++;
+	}
+}
+
 
 struct device_driver_t uart_driver =
 {
     .name = "uart_driver",
     .init = init_uart,
-	.write = write_uart
+	.write = tx_str
 };
 
 MODULE_INIT(uart_driver)

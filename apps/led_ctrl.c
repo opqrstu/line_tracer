@@ -31,3 +31,22 @@ int count_led()
 
 	return 0;
 }
+int on_led(char pin)
+{
+	struct device_driver_t* led = -1;
+	led = get_device_driver("led_driver", driver_list_head);
+	if(led == -1)
+		return -1;
+	
+	led->write(1<<pin, LED_ON);
+	return 0;
+}
+int off_led(char pin)
+{
+	struct device_driver_t* led = -1;
+	led = get_device_driver("led_driver", driver_list_head);
+	if(led == -1)
+		return -1;
+	led->write(1<<pin, LED_OFF);
+	return 0;
+}

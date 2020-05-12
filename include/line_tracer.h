@@ -2,10 +2,21 @@
 #define TIMER_DRIVER
 #define MOTOR_DRIVER
 #define UART_DRIVER
+#define BLUETOOTH_DRIVER
+#define INFRARED_DRIVER
 
 #ifdef LED_DRIVER
 #define LED_PORT PORTC
 #define LED_DDR DDRC
+enum
+{
+	LED_PIN1 = 0,
+	LED_PIN2 = 1,
+	LED_PIN3 = 2,
+	LED_PIN4 = 3,
+	LED_PIN5 = 4,
+	LED_MAX	
+};
 #endif /* LED_DRIVER */
 
 #ifdef MOTOR_DRIVER
@@ -24,6 +35,18 @@
 #define MOTOR_R_PORT PORTE
 
 #define PC_PWM_MOTOR
+#endif
+
+#ifdef INFRARED_DRIVER
+#define INFRARED_DDR PORTA
+#define INFRARED_PIN PINA
+enum
+{
+	INFRARED_PIN1 = 0,
+	INFRARED_PIN2,
+	INFRARED_PIN3,
+	INFRARED_MAX	
+};
 #endif
 
 

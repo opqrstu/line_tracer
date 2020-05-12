@@ -80,10 +80,8 @@ int init_drivers(struct driver_list_node_t *head)
 {
     struct driver_list_node_t* tmp_node = 0;
 
-PORTC = ledtest--;
     for(tmp_node = head->next; tmp_node;tmp_node = tmp_node->next)
     {
-PORTC = ledtest--;
         if(tmp_node->driver.init)
             tmp_node->driver.init();
     }
