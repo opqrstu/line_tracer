@@ -14,6 +14,12 @@
 #include <motor.h>
 #endif
 
+#ifdef DEBUG_PRINT
+#define DEBUG(fmt,args...)   debug_print(fmt ,##args)
+#else
+#define DEBUG(fmt,args...)
+#endif
+
 struct device_driver_t
 {
     char name[20];

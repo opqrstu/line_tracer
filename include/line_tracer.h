@@ -4,6 +4,13 @@
 #define UART_DRIVER
 #define BLUETOOTH_DRIVER
 #define INFRARED_DRIVER
+#define DEBUG_PRINT
+
+#ifdef DEBUG_PRINT
+#ifdef UART_DRIVER
+#define debug_print(fmt,args...) write_uart(fmt ,##args)
+#endif
+#endif
 
 #ifdef LED_DRIVER
 #define LED_PORT PORTC
